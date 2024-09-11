@@ -82,7 +82,7 @@
       <updated>1724219214007</updated>
       <workItem from="1724219219126" duration="2368000" />
       <workItem from="1724221905438" duration="451000" />
-      <workItem from="1726031273326" duration="2910000" />
+      <workItem from="1726031273326" duration="3843000" />
     </task>
     <servers />
   </component>
@@ -90,6 +90,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/flaskmuhak_project$main.coverage" NAME="main 커버리지 결과" MODIFIED="1726034585915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flaskmuhak_project$main.coverage" NAME="main 커버리지 결과" MODIFIED="1726035665166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
