@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 식단</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+        .meal-container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-top: 30px;
+            gap: 40px; /* 섹션 사이 간격 추가 */
+        }
+        .meal {
+            background-color: white;
+            width: 30%;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .meal h2 {
+            margin-bottom: 10px;
+            color: #007BFF;
+        }
+        .meal p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>오늘의 식단</h1>
+
+    <div class="meal-container">
+        <!-- 조식 섹션 -->
+        <div class="meal">
+            <h2>조식</h2>
+            <p>계란볶음</p>
+        </div>
+
+        <!-- 중식 섹션 -->
+        <div class="meal">
+            <h2>중식</h2>
+            <p>점심 식사 메뉴가 여기에 표시됩니다.</p>
+        </div>
+
+        <!-- 석식 섹션 -->
+        <div class="meal">
+            <h2>석식</h2>
+            <p>저녁 식사 메뉴가 여기에 표시됩니다.</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
