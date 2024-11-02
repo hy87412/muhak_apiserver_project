@@ -7,6 +7,7 @@
     <list default="true" id="1066d71b-f074-4a3e-ac4a-e7ff13f26419" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bobpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bobpage.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +120,7 @@
       <workItem from="1729060585965" duration="80000" />
       <workItem from="1729911698038" duration="2156000" />
       <workItem from="1729956072120" duration="7264000" />
-      <workItem from="1730510068196" duration="2983000" />
+      <workItem from="1730510068196" duration="4056000" />
     </task>
     <servers />
   </component>
@@ -127,7 +128,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/flaskmuhak_project$main.coverage" NAME="main 커버리지 결과" MODIFIED="1730512090668" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/flaskmuhak_project$main__1_.coverage" NAME="main (1) 커버리지 결과" MODIFIED="1729962771999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../test" />
+    <SUITE FILE_PATH="coverage/flaskmuhak_project$main.coverage" NAME="main 커버리지 결과" MODIFIED="1730514147798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flaskmuhak_project$main__1_.coverage" NAME="main (1) 커버리지 결과" MODIFIED="1730514142593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../test" />
   </component>
 </project>

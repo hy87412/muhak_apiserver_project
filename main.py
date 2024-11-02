@@ -12,6 +12,10 @@ urlform2 = '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8
 niceboburl = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=322f1dd4d7da4766a9c6828c4d861880&MLSV_YMD=20241016&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 dateform = 'https://open.neis.go.kr/hub/SchoolSchedule?KEY=' + datekey + '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 
+#variables
+global latestupdatedate
+latestupdatedate = "00000000"
+
 originpageform = """<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -149,7 +153,11 @@ def sendData():
 
 @app.route('/')
 def page():
-    updatepage()
+    global latestupdatedate
+    if latestupdatedate != getdate() :
+        updatepage()
+        latestupdatedate = getdate()
+        print('updated!')
     return render_template('bobpage.html')
 
 if __name__ == "__main__":
