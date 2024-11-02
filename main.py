@@ -10,7 +10,7 @@ datekey = '49fb1d96db7144808dfcb388fb0cc326'
 urlform1 = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=' + bobkey + '&MLSV_YMD='
 urlform2 = '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 niceboburl = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=322f1dd4d7da4766a9c6828c4d861880&MLSV_YMD=20241016&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
-dateform = 'https://open.neis.go.kr/hub/SchoolSchedule?KEY=' + datekey + '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
+planurlform = 'https://open.neis.go.kr/hub/SchoolSchedule?KEY=' + datekey + '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 
 #variables
 global latestupdatedate
@@ -21,7 +21,7 @@ originpageform = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>오늘의 식단</title>
+    <title>mubob from muhakapi</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,8 +62,6 @@ originpageform = """<!DOCTYPE html>
 </head>
 <body>
 
-    <h1>오늘의 식단</h1>
-
     <div class="meal-container">
         <!-- 조식 섹션 -->
         <div class="meal">
@@ -88,19 +86,19 @@ originpageform = """<!DOCTYPE html>
         <!-- 하단 0열 -->
         <div class="meal">
             <h2>학사일정</h2>
-            <p>{flow0valuef}</p>
+            <p>{frow0valuef}</p>
         </div>
 
         <!-- 하단 1열 -->
         <div class="meal">
             <h2>D-day</h2>
-            <p>{flow1valuef}</p>
+            <p>{frow1valuef}</p>
         </div>
 
         <!-- 하단 2열 -->
         <div class="meal">
             <h2>Jaewon Foundation</h2>
-            <p>{flow2valuef}</p>
+            <p>{frow2valuef}</p>
         </div>
     </div>
 
@@ -135,6 +133,18 @@ def updatepage():
         except :
             editpageform = editpageform.replace(f'{{fbob{i}f}}', '밥없어')
             editpageform = editpageform.replace(f'{{fkcal{i}f}}', '밥없어')
+
+    plandata = requests.get(planurlform + '&AA_FROM_YMD=' + getdate()).json()
+    planlist = []
+    count = 0
+    for item in plandata["SchoolSchedule"][1]["row"] :
+        if item["EVENT_NM"] != '토요휴업일' :
+            planlist.append(item["AA_YMD"] + "-" + item["EVENT_NM"])
+            count = count + 1
+        if count == 10 :
+            break
+    editpageform = editpageform.replace('{frow0valuef}', '<br/>'.join(planlist))
+
     with open('templates/bobpage.html', 'w', encoding='utf-8') as file:
         file.write(editpageform)
 
@@ -157,7 +167,6 @@ def page():
     if latestupdatedate != getdate() :
         updatepage()
         latestupdatedate = getdate()
-        print('updated!')
     return render_template('bobpage.html')
 
 if __name__ == "__main__":
