@@ -2,11 +2,15 @@ import datetime
 from flask import Flask, jsonify, render_template
 import requests
 import json
+
 app = Flask(__name__)
 
-urlform1 = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=' + '322f1dd4d7da4766a9c6828c4d861880' + '&MLSV_YMD='
+bobkey = '322f1dd4d7da4766a9c6828c4d861880'
+datekey = '49fb1d96db7144808dfcb388fb0cc326'
+urlform1 = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=' + bobkey + '&MLSV_YMD='
 urlform2 = '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
-niceurl = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=322f1dd4d7da4766a9c6828c4d861880&MLSV_YMD=20241016&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
+niceboburl = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=322f1dd4d7da4766a9c6828c4d861880&MLSV_YMD=20241016&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
+nicedateurl = 'https://open.neis.go.kr/hub/SchoolSchedule?KEY=' + datekey + '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 
 originpageform = """<!DOCTYPE html>
 <html lang="ko">
@@ -59,20 +63,20 @@ originpageform = """<!DOCTYPE html>
     <div class="meal-container">
         <!-- 조식 섹션 -->
         <div class="meal">
-            <h2>조식</h2>
-            <p>bob0</p>
+            <h2>조식{fkcal0f}</h2>
+            <p>{fbob0f}</p>
         </div>
 
         <!-- 중식 섹션 -->
         <div class="meal">
-            <h2>중식</h2>
-            <p>bob1</p>
+            <h2>중식{fkcal1f}</h2>
+            <p>{fbob1f}</p>
         </div>
 
         <!-- 석식 섹션 -->
         <div class="meal">
-            <h2>석식</h2>
-            <p>bob2</p>
+            <h2>석식{fkcal2f}</h2>
+            <p>{fbob2f}</p>
         </div>
     </div>
 
@@ -90,14 +94,23 @@ def getdate() :
 
 def updatepage():
     response = requests.get(urlform1 + getdate() + urlform2)
+    # response = requests.get(niceboburl)
     bobdata = response.json()
     boblist = []
     for item in bobdata["mealServiceDietInfo"][1]["row"]:
         boblist.append(item["DDISH_NM"])
+    kcallist = []
+    for item in bobdata["mealServiceDietInfo"][1]["row"]:
+        kcallist.append(item["CAL_INFO"])
     editpageform = originpageform
-    editpageform = editpageform.replace('bob0', boblist[0])
-    editpageform = editpageform.replace('bob1', boblist[1])
-    editpageform = editpageform.replace('bob2', boblist[2])
+
+    for i in range(3) :
+        try :
+            editpageform = editpageform.replace(f'{{fbob{i}f}}', boblist[i])
+            editpageform = editpageform.replace(f'{{fkcal{i}f}}', kcallist[i])
+        except :
+            editpageform = editpageform.replace(f'{{fbob{i}f}}', '밥없어')
+            editpageform = editpageform.replace(f'{{fkcal{i}f}}', '밥없어')
     with open('templates/bobpage.html', 'w', encoding='utf-8') as file:
         file.write(editpageform)
 
