@@ -10,7 +10,7 @@ datekey = '49fb1d96db7144808dfcb388fb0cc326'
 urlform1 = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=' + bobkey + '&MLSV_YMD='
 urlform2 = '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 niceboburl = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=322f1dd4d7da4766a9c6828c4d861880&MLSV_YMD=20241016&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
-nicedateurl = 'https://open.neis.go.kr/hub/SchoolSchedule?KEY=' + datekey + '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
+dateform = 'https://open.neis.go.kr/hub/SchoolSchedule?KEY=' + datekey + '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 
 originpageform = """<!DOCTYPE html>
 <html lang="ko">
@@ -63,25 +63,46 @@ originpageform = """<!DOCTYPE html>
     <div class="meal-container">
         <!-- 조식 섹션 -->
         <div class="meal">
-            <h2>조식{fkcal0f}</h2>
+            <h2>조식 {fkcal0f}</h2>
             <p>{fbob0f}</p>
         </div>
 
         <!-- 중식 섹션 -->
         <div class="meal">
-            <h2>중식{fkcal1f}</h2>
+            <h2>중식 {fkcal1f}</h2>
             <p>{fbob1f}</p>
         </div>
 
         <!-- 석식 섹션 -->
         <div class="meal">
-            <h2>석식{fkcal2f}</h2>
+            <h2>석식 {fkcal2f}</h2>
             <p>{fbob2f}</p>
         </div>
     </div>
 
+    <div class="meal-container">
+        <!-- 하단 0열 -->
+        <div class="meal">
+            <h2>학사일정</h2>
+            <p>{flow0valuef}</p>
+        </div>
+
+        <!-- 하단 1열 -->
+        <div class="meal">
+            <h2>D-day</h2>
+            <p>{flow1valuef}</p>
+        </div>
+
+        <!-- 하단 2열 -->
+        <div class="meal">
+            <h2>Jaewon Foundation</h2>
+            <p>{flow2valuef}</p>
+        </div>
+    </div>
+
 </body>
-</html>"""
+</html>
+"""
 
 def getdate() :
     time = datetime.datetime.now()
@@ -103,7 +124,6 @@ def updatepage():
     for item in bobdata["mealServiceDietInfo"][1]["row"]:
         kcallist.append(item["CAL_INFO"])
     editpageform = originpageform
-
     for i in range(3) :
         try :
             editpageform = editpageform.replace(f'{{fbob{i}f}}', boblist[i])

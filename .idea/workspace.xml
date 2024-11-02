@@ -7,7 +7,6 @@
     <list default="true" id="1066d71b-f074-4a3e-ac4a-e7ff13f26419" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bobpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bobpage.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +119,7 @@
       <workItem from="1729060585965" duration="80000" />
       <workItem from="1729911698038" duration="2156000" />
       <workItem from="1729956072120" duration="7264000" />
-      <workItem from="1730510068196" duration="2047000" />
+      <workItem from="1730510068196" duration="2983000" />
     </task>
     <servers />
   </component>
