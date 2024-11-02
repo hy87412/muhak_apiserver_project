@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWS</title>
+    <style>
+        /* 전체 페이지 기본 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 로고 섹션 스타일 */
+        .logo {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 하이퍼링크 이미지 스타일 */
+        .link-icon {
+            margin-left: 15px; /* 로고와의 간격 조정 */
+            width: 30px;
+            height: 30px;
+        }
+
+        /* 소개 섹션 스타일 */
+        .introduction {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .intro-person {
+            width: 45%;
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 연락처 정보 섹션 스타일 */
+        .contact-info {
+            margin-top: 20px;
+            width: 80%;
+            padding: 10px;
+            text-align: center;
+            background-color: #f9f9f9;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- 로고 섹션 -->
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/JWSlogo.jpg') }}" alt="JWS 로고" width="200">
+
+        <!-- 하이퍼링크 이미지 -->
+        <a href="https://www.mubob.com/" target="_blank">
+            <img src="{{ url_for('static', filename='images/mubobicon.jpg') }}" alt="링크 아이콘" class="link-icon">
+        </a>
+    </div>
+
+    <!-- 소개 섹션 -->
+    <div class="introduction">
+        <div class="intro-person">
+            <h2>허재원</h2>
+            <p>이곳에 첫 번째 사람의 소개글을 작성하세요.</p>
+        </div>
+        <div class="intro-person">
+            <h2>이주현</h2>
+            <p>이곳에 두 번째 사람의 소개글을 작성하세요.</p>
+        </div>
+    </div>
+
+    <!-- 연락처 정보 섹션 -->
+    <div class="contact-info">
+        <h2>Contact Us</h2>
+        <p>이메일: example@jws.com</p>
+        <p>전화번호: 010-1234-5678</p>
+        <p>주소: 서울특별시 강남구 테헤란로</p>
+    </div>
+</body>
+</html>

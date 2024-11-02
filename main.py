@@ -9,7 +9,7 @@ bobkey = '322f1dd4d7da4766a9c6828c4d861880'
 datekey = '49fb1d96db7144808dfcb388fb0cc326'
 urlform1 = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=' + bobkey + '&MLSV_YMD='
 urlform2 = '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
-niceboburl = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=322f1dd4d7da4766a9c6828c4d861880&MLSV_YMD=20241016&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
+niceboburl = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=322f1dd4d7da4766a9c6828c4d861880&MLSV_YMD=20241102&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 planurlform = 'https://open.neis.go.kr/hub/SchoolSchedule?KEY=' + datekey + '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 
 #variables
@@ -97,7 +97,10 @@ originpageform = """<!DOCTYPE html>
 
         <!-- 하단 2열 -->
         <div class="meal">
-            <h2>Jaewon Foundation</h2>
+            <h2>JWS</h2>
+            <a href="https://www.example.com" target="_blank">
+                <img src="{{ url_for('static', filename='images/JWSlogo.jpg')}}" alt="링크 아이콘" class="link-icon">
+            </a>
             <p>{frow2valuef}</p>
         </div>
     </div>
@@ -129,16 +132,20 @@ def calculate_dday(target_date_str):
     return dday
 
 def updatepage():
+    editpageform = originpageform
     response = requests.get(urlform1 + getdate() + urlform2)
     # response = requests.get(niceboburl)
     bobdata = response.json()
     boblist = []
-    for item in bobdata["mealServiceDietInfo"][1]["row"]:
-        boblist.append(item["DDISH_NM"])
     kcallist = []
-    for item in bobdata["mealServiceDietInfo"][1]["row"]:
-        kcallist.append(item["CAL_INFO"])
-    editpageform = originpageform
+    try :
+        for item in bobdata["mealServiceDietInfo"][1]["row"]:
+            boblist.append(item["DDISH_NM"])
+        for item in bobdata["mealServiceDietInfo"][1]["row"]:
+            kcallist.append(item["CAL_INFO"])
+    except :
+        boblist = ['오늘은 밥이 없어요...','오늘은 밥이 없어요...','오늘은 밥이 없어요...']
+        kcallist = ['','','']
     for i in range(3) :
         try :
             editpageform = editpageform.replace(f'{{fbob{i}f}}', boblist[i])
@@ -171,12 +178,12 @@ def updatepage():
         dday12 = calculate_dday(grade12)
     except :
         now = getdate()
-        dday12 = '{}년에는 없어요 :)'.format(now[:4])
+        dday12 = '{}년 시험을 다쳤어요 :)'.format(now[:4])
     try :
         dday3 = calculate_dday(grade3)
     except :
         now = getdate()
-        dday3 = '{}년에는 없어요 :)'.format(now[:4])
+        dday3 = '{}년 시험을 다쳤어요 :)'.format(now[:4])
     editpageform = editpageform.replace('{frow1valuef}',f'1,2학년 : {dday12} <br/>3학년 : {dday3}')
     with open('templates/bobpage.html', 'w', encoding='utf-8') as file:
         file.write(editpageform)
@@ -194,8 +201,12 @@ def sendData():
     data = respone.json()
     return data
 
+@app.route('/jws')
+def sendjwspage():
+    return render_template('JWSpage.html')
+
 @app.route('/')
-def page():
+def sendlobbypage():
     global latestupdatedate
     if latestupdatedate != getdate() :
         updatepage()
