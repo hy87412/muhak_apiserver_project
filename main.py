@@ -115,6 +115,19 @@ def getdate() :
     result = str(todaydate)
     return result
 
+def determineyearrange(point) :
+    if point == 'end' :
+        nowymd = getdate()
+        return nowymd[:4] + '1231'
+    elif point == 'begin' :
+        return getdate()
+
+def calculate_dday(target_date_str):
+    today = datetime.datetime.today().date()
+    target_date = datetime.datetime.strptime(target_date_str, "%Y%m%d").date()
+    dday = (target_date - today).days
+    return dday
+
 def updatepage():
     response = requests.get(urlform1 + getdate() + urlform2)
     # response = requests.get(niceboburl)
@@ -134,17 +147,37 @@ def updatepage():
             editpageform = editpageform.replace(f'{{fbob{i}f}}', '밥없어')
             editpageform = editpageform.replace(f'{{fkcal{i}f}}', '밥없어')
 
-    plandata = requests.get(planurlform + '&AA_FROM_YMD=' + getdate()).json()
+    plandata = requests.get(planurlform + '&AA_FROM_YMD=' + getdate() + '&AA_TO_YMD=' + determineyearrange('end')).json()
+
     planlist = []
     count = 0
     for item in plandata["SchoolSchedule"][1]["row"] :
         if item["EVENT_NM"] != '토요휴업일' :
             planlist.append(item["AA_YMD"] + "-" + item["EVENT_NM"])
             count = count + 1
-        if count == 10 :
+        if count == 15 :
             break
     editpageform = editpageform.replace('{frow0valuef}', '<br/>'.join(planlist))
 
+    for item in plandata["SchoolSchedule"][1]["row"] :
+        if item['EVENT_NM'] == '지필 1회(1,2년)' or item['EVENT_NM'] == '지필 2회(1,2년)' :
+            grade12 = item['AA_YMD']
+            break
+    for item in plandata["SchoolSchedule"][1]["row"] :
+        if item['EVENT_NM'] == '지필 1회(3년)' or item['EVENT_NM'] == '지필 2회(3년)' :
+            grade3 = item['AA_YMD']
+            break
+    try :
+        dday12 = calculate_dday(grade12)
+    except :
+        now = getdate()
+        dday12 = '{}년에는 없어요 :)'.format(now[:4])
+    try :
+        dday3 = calculate_dday(grade3)
+    except :
+        now = getdate()
+        dday3 = '{}년에는 없어요 :)'.format(now[:4])
+    editpageform = editpageform.replace('{frow1valuef}',f'1,2학년 : {dday12} <br/>3학년 : {dday3}')
     with open('templates/bobpage.html', 'w', encoding='utf-8') as file:
         file.write(editpageform)
 
