@@ -16,17 +16,8 @@
         }
 
         /* 로고 섹션 스타일 */
-        .logo {
+        .logo-container {
             margin-top: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        /* 하이퍼링크 이미지 스타일 */
-        .link-icon {
-            margin-left: 15px; /* 로고와의 간격 조정 */
-            width: 30px;
-            height: 30px;
         }
 
         /* 소개 섹션 스타일 */
@@ -38,9 +29,10 @@
             text-align: center;
         }
         .intro-person {
-            width: 45%;
+            width: 30%;
             padding: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
         }
 
         /* 연락처 정보 섹션 스타일 */
@@ -52,37 +44,53 @@
             background-color: #f9f9f9;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        /* 하단 하이퍼링크 아이콘 스타일 */
+        .footer-link {
+            margin-top: 20px;
+            padding-bottom: 20px;
+        }
+        .link-icon {
+            width: 30px;
+            height: 30px;
+        }
     </style>
 </head>
 <body>
     <!-- 로고 섹션 -->
-    <div class="logo">
-        <img src="{{ url_for('static', filename='images/JWSlogo.jpg') }}" alt="JWS 로고" width="200">
-
-        <!-- 하이퍼링크 이미지 -->
-        <a href="https://www.mubob.com/" target="_blank">
-            <img src="{{ url_for('static', filename='images/mubobicon.jpg') }}" alt="링크 아이콘" class="link-icon">
-        </a>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/JWSlogo.png') }}" alt="JWS 로고" width="200">
     </div>
 
     <!-- 소개 섹션 -->
     <div class="introduction">
         <div class="intro-person">
             <h2>허재원</h2>
-            <p>이곳에 첫 번째 사람의 소개글을 작성하세요.</p>
+            <p>서버개발자<br>e-mail : hy87412@naver.com</p>
         </div>
         <div class="intro-person">
             <h2>이주현</h2>
-            <p>이곳에 두 번째 사람의 소개글을 작성하세요.</p>
+            <p>서버관리자<br>e-mail : admin@mubob.com</p>
+        </div>
+        <div class="intro-person">
+            <h2>이승훈</h2>
+            <p>sponsor<br>e-mail : </p>
         </div>
     </div>
 
     <!-- 연락처 정보 섹션 -->
     <div class="contact-info">
         <h2>Contact Us</h2>
-        <p>이메일: example@jws.com</p>
-        <p>전화번호: 010-1234-5678</p>
-        <p>주소: 서울특별시 강남구 테헤란로</p>
+        <p>이메일: admin@mubob.com</p>
+        <p>경상북도 경산시 하양읍 금송로 71-11</p>
+        <p>대구가톨릭대학교사범대학부속무학고등학교</p>
+    </div>
+
+    <!-- 하단 하이퍼링크 아이콘 -->
+    <div class="footer-link">
+        <a href="https://www.mubob.com/" target="_blank">
+            <img src="{{ url_for('static', filename='images/mubobicon.jpg') }}" alt="링크 아이콘" class="link-icon">
+        </a>
     </div>
 </body>
 </html>

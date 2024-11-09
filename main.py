@@ -37,15 +37,18 @@ originpageform = """<!DOCTYPE html>
             color: #333;
         }
         .meal-container {
+            width: 100%;
+            max-width: 500px; /* 카드 최대 너비 설정 */
             display: flex;
-            justify-content: space-between;
-            width: 80%;
-            margin-top: 30px;
-            gap: 40px; /* 섹션 사이 간격 추가 */
+            flex-direction: column; /* 세로 정렬 */
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+            padding: 0 10px;
         }
         .meal {
             background-color: white;
-            width: 30%;
+            width: 100%; /* 카드가 컨테이너 너비를 꽉 채우도록 */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -80,28 +83,25 @@ originpageform = """<!DOCTYPE html>
             <h2>석식 {fkcal2f}</h2>
             <p>{fbob2f}</p>
         </div>
-    </div>
 
-    <div class="meal-container">
-        <!-- 하단 0열 -->
+        <!-- 학사일정 섹션 -->
         <div class="meal">
             <h2>학사일정</h2>
             <p>{frow0valuef}</p>
         </div>
 
-        <!-- 하단 1열 -->
+        <!-- D-day 섹션 -->
         <div class="meal">
             <h2>D-day</h2>
             <p>{frow1valuef}</p>
         </div>
 
-        <!-- 하단 2열 -->
+        <!-- JWS 섹션 -->
         <div class="meal">
-            <h2>JWS</h2>
-            <a href="https://www.example.com" target="_blank">
-                <img src="{{ url_for('static', filename='images/JWSlogo.jpg')}}" alt="링크 아이콘" class="link-icon">
+            <h2>Who we are</h2>
+            <a href="https://www.mubob.com/jws" target="_blank">
+                <img src="{{ url_for('static', filename='images/JWSlogo.png')}}" alt="링크 아이콘" class="link-icon">
             </a>
-            <p>{frow2valuef}</p>
         </div>
     </div>
 
@@ -214,4 +214,4 @@ def sendlobbypage():
     return render_template('bobpage.html')
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000, host='0.0.0.0')
+    app.run(debug=False, port=5000, host='0.0.0.0')
