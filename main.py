@@ -37,9 +37,9 @@ originpageform = """<!DOCTYPE html>
         }
         .meal-container {
             width: 100%;
-            max-width: 500px; /* 카드 최대 너비 설정 */
+            max-width: 500px;
             display: flex;
-            flex-direction: column; /* 세로 정렬 */
+            flex-direction: column;
             align-items: center;
             gap: 20px;
             margin-top: 20px;
@@ -47,7 +47,7 @@ originpageform = """<!DOCTYPE html>
         }
         .meal {
             background-color: white;
-            width: 100%; /* 카드가 컨테이너 너비를 꽉 채우도록 */
+            width: 100%;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -59,6 +59,14 @@ originpageform = """<!DOCTYPE html>
         }
         .meal p {
             color: #555;
+        }
+
+        /* 이미지 스타일 */
+        .meal img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* 카드 모서리에 맞추어 이미지도 둥글게 */
+            margin-top: 10px;
         }
     </style>
 </head>
