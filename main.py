@@ -13,7 +13,6 @@ niceboburl = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=322f1dd4d7da47
 planurlform = 'https://open.neis.go.kr/hub/SchoolSchedule?KEY=' + datekey + '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 
 #variables
-global latestupdatedate
 latestupdatedate = "00000000"
 
 originpageform = """<!DOCTYPE html>
