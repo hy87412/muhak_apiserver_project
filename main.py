@@ -1,17 +1,16 @@
 import datetime
-from flask import Flask, jsonify, render_template
+from flask import Flask, render_template
 import requests
 import json
 
 app = Flask(__name__)
 
-with open('keys.json', 'r') as keys:
-    json_dic = json.load(keys)
+with open('keys.json', 'r') as json_file:
+    json_dic = json.load(json_file)
     bobkey = json_dic['key1']
     datekey = json_dic['key2']
 urlform1 = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=' + bobkey + '&MLSV_YMD='
 urlform2 = '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
-niceboburl = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=322f1dd4d7da4766a9c6828c4d861880&MLSV_YMD=20241102&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 planurlform = 'https://open.neis.go.kr/hub/SchoolSchedule?KEY=' + datekey + '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 
 #variables
@@ -153,15 +152,15 @@ def updatepage():
         for item in bobdata["mealServiceDietInfo"][1]["row"]:
             kcallist.append(item["CAL_INFO"])
     except :
-        boblist = ['오늘은 밥이 없어요...','오늘은 밥이 없어요...','오늘은 밥이 없어요...']
+        boblist = ['노밥','노밥','노밥']
         kcallist = ['','','']
     for i in range(3) :
         try :
             editpageform = editpageform.replace(f'{{fbob{i}f}}', boblist[i])
             editpageform = editpageform.replace(f'{{fkcal{i}f}}', kcallist[i])
         except :
-            editpageform = editpageform.replace(f'{{fbob{i}f}}', '밥없어')
-            editpageform = editpageform.replace(f'{{fkcal{i}f}}', '밥없어')
+            editpageform = editpageform.replace(f'{{fbob{i}f}}', '노밥')
+            editpageform = editpageform.replace(f'{{fkcal{i}f}}', '노밥')
 
     plandata = requests.get(planurlform + '&AA_FROM_YMD=' + getdate() + '&AA_TO_YMD=' + determineyearrange('end')).json()
 
