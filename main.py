@@ -5,8 +5,10 @@ import json
 
 app = Flask(__name__)
 
-bobkey = '322f1dd4d7da4766a9c6828c4d861880'
-datekey = '49fb1d96db7144808dfcb388fb0cc326'
+with open('keys.json', 'r') as keys:
+    json_dic = json.load(keys)
+    bobkey = json_dic['key1']
+    datekey = json_dic['key2']
 urlform1 = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=' + bobkey + '&MLSV_YMD='
 urlform2 = '&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
 niceboburl = 'https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=322f1dd4d7da4766a9c6828c4d861880&MLSV_YMD=20241102&Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750594'
