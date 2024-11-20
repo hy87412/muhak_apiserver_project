@@ -3,6 +3,7 @@ from flask import Flask, render_template
 import requests
 import json
 
+print("starting server...")
 app = Flask(__name__)
 
 with open('keys.json', 'r') as json_file:
@@ -116,6 +117,9 @@ originpageform = """<!DOCTYPE html>
 </body>
 </html>
 """
+
+print("complete starting server")
+print("server on running")
 
 def getdate() :
     time = datetime.datetime.now()
