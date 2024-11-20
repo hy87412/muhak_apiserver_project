@@ -107,7 +107,7 @@ originpageform = """<!DOCTYPE html>
         <!-- JWS 섹션 -->
         <div class="meal">
             <h2>Who we are</h2>
-            <a href="https://www.mubob.com/jws" target="_blank">
+            <a href="https://www.mhbob.com/jws" target="_blank">
                 <img src="{{ url_for('static', filename='images/JWSlogo.png')}}" alt="링크 아이콘" class="link-icon">
             </a>
         </div>
