@@ -2,6 +2,8 @@ import datetime
 from flask import Flask, render_template
 import requests
 import json
+import pytz
+from apscheduler.schedulers.background import BackgroundScheduler
 
 print("starting server...")
 app = Flask(__name__)
@@ -119,10 +121,11 @@ originpageform = """<!DOCTYPE html>
 """
 
 print("complete starting server")
-print("server on running")
+print("server is on running")
 
 def getdate() :
-    time = datetime.datetime.now()
+    timezone = pytz.timezone("Asia/Seoul")
+    time = datetime.datetime.now(timezone)
     year = str(time.year).zfill(2)
     month = str(time.month).zfill(2)
     day = str(time.day).zfill(2)
@@ -199,6 +202,10 @@ def updatepage():
     editpageform = editpageform.replace('{frow1valuef}',f'1,2학년 : {dday12} <br/>3학년 : {dday3}')
     with open('templates/bobpage.html', 'w', encoding='utf-8') as file:
         file.write(editpageform)
+
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=updatepage, trigger="interval", minutes=10)  # 10분마다 업데이트
+scheduler.start()
 
 #server route code
 
